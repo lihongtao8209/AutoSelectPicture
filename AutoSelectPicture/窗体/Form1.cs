@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using AutoSelectPicture.窗体;
 using AutoSelectPicture.工具;
+using AutoSelectPicture.IO.层级目录下所有文件;
 
 namespace AutoSelectPicture
 {
@@ -178,12 +179,15 @@ namespace AutoSelectPicture
 			button2.Visible = false;
 			textBox1.Enabled = false;
 			this.Focus();
-			/*
+            /*
             Control control = label1;
             Console.WriteLine("{0},{1}",control.GetType().FullName, control.GetType().UnderlyingSystemType.Name);
 			 */
-			XmlWriter xmlWriter = new XmlWriter();
-		}
+            //XmlWriter xmlWriter = new XmlWriter();
+            CascadeDirFiles cascadeDir = new CascadeDirFiles();
+            cascadeDir.GetDirFiles(@"D:\照片");
+
+        }
 
 		private void Button2_Click(object sender, EventArgs e)
 		{
