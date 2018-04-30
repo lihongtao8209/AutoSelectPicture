@@ -21,7 +21,6 @@ namespace AutoSelectPicture.IO.层级目录下所有文件
 	{
 		private string pictureDirectory = "";
         private Dictionary<string, string[]> pictureDictionary = null;
-        private Dictionary<Dictionary<int,string>,List<string>> cascadeDictionary=null;
 		public CascadeDirFiles()
 		{
 		}
@@ -31,8 +30,6 @@ namespace AutoSelectPicture.IO.层级目录下所有文件
             this.pictureDirectory = pictureDirectory;
             //
             bool isDirExist = false;
-            string[] pictureFiles = null;
-            List<string> directoryList = null;
             List<string> pictureFileList = new List<string>();
             DirectoryCollection pictureCollection = new DirectoryCollection();
             DirectoryFiles pictureDirFiles = new DirectoryFiles();
