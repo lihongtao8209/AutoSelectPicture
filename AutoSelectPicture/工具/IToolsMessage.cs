@@ -15,18 +15,18 @@ namespace AutoSelectPicture.工具
 	/// </summary>
 	public class IToolsMessage
 	{
-		protected static string message = "";
-		protected static string getMessage()
+		protected static string messageInfo = "";
+		protected static string GetMessage()
 		{
-			return message;
+			return messageInfo;
 		}
-		protected static void setMessage(string message)
+		protected static void SetMessage(string message)
 		{
-			message = message;
+            messageInfo = message;
 		}
-		protected static void setMessage(string message, string messageTrace)
+		protected static void SetMessage(string message, string messageTrace)
 		{
-			message = message + "\r\n" + messageTrace;
+            messageInfo = message + "\r\n" + messageTrace;
 		}
 	}
 }

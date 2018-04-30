@@ -84,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="XML\XmlWriter.cs" />
+    <Compile Include="工具\DictionaryTools.cs" />
     <Compile Include="工具\IToolsMessage.cs" />
     <Compile Include="工具\IOTools.cs" />
     <Compile Include="工具\PathTools.cs" />

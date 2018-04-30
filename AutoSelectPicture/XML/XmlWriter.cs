@@ -53,7 +53,7 @@ namespace AutoSelectPicture
         private List<string> QueryNodeNameList(string nodeName,XmlNodeList xmlNodeList)
         {
         	//清空列表
-        	if(nodeList.Count!=0);
+        	if(nodeList.Count!=0)
         	{
         		nodeList.Clear();
         	}
@@ -114,7 +114,7 @@ namespace AutoSelectPicture
         private void UpdateNodeNameList(string nodeName,string innerText,XmlNodeList xmlNodeList)
         {
         	//清空列表
-        	if(nodeList.Count!=0);
+        	if(nodeList.Count!=0)
         	{
         		nodeList.Clear();
         	}
@@ -236,12 +236,12 @@ namespace AutoSelectPicture
         }
 		
 		//返回结点内容列表
-		public List<string> getInnerTextList(){
+		public List<string> GetInnerTextList(){
 			return innerTextList;
 		}
 		
 		//返回结点列表
-		public List<XmlNode> getXmlNodeList(){
+		public List<XmlNode> GetXmlNodeList(){
 			return nodeList;
 		}
     }

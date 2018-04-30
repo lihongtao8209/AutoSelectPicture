@@ -197,7 +197,7 @@ namespace AutoSelectPicture.工具
 			}catch(Exception exception)
 			{
 				subDirectory="";
-				setMessage(exception.Message,exception.StackTrace);
+				SetMessage(exception.Message,exception.StackTrace);
 				string functionName = System.Reflection.MethodBase.GetCurrentMethod().Name;
 				throw new Exception(functionName,exception);
 			}

@@ -36,12 +36,14 @@ namespace AutoSelectPicture.工具
 				if (File.Exists(this.fileName)) {
 					fileStream = new FileStream(this.fileName, FileMode.Open, FileAccess.Read);
 					binaryReader = new System.IO.BinaryReader(fileStream);
-					while ((fileByte = binaryReader.ReadByte()) != -1) {
+                    fileByte = binaryReader.ReadByte();
+                    while ((int)fileByte != -1) {
 						byteList.Add(fileByte);
-					}
+                        fileByte = binaryReader.ReadByte();
+                    }
 				} 
 			} catch (Exception exception) {
-				setMessage(exception.Message,exception.StackTrace);
+				SetMessage(exception.Message,exception.StackTrace);
 			}finally{
 				binaryReader.Close();
 				fileStream.Close();
@@ -59,7 +61,7 @@ namespace AutoSelectPicture.工具
 					binaryWriter.Write(byteArray);
 				}
 			}catch(Exception exception){
-				setMessage(exception.Message,exception.StackTrace);
+				SetMessage(exception.Message,exception.StackTrace);
 			}finally{
 				binaryWriter.Close();
 				fileStream.Close();
