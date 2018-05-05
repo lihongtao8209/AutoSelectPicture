@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using AutoSelectPicture.正则表达式;
 using AutoSelectPicture.窗体;
 using AutoSelectPicture.工具;
 using AutoSelectPicture.IO.层级目录下所有文件;
@@ -179,14 +180,16 @@ namespace AutoSelectPicture
 			button2.Visible = false;
 			textBox1.Enabled = false;
 			this.Focus();
-            /*
-            Control control = label1;
-            Console.WriteLine("{0},{1}",control.GetType().FullName, control.GetType().UnderlyingSystemType.Name);
-			 */
-            //XmlWriter xmlWriter = new XmlWriter();
+			/*
             CascadeDirFiles cascadeDir = new CascadeDirFiles();
             cascadeDir.GetDirFiles(@"D:\照片");
-
+            */
+           //IOTools.CopyFile(@"D:\test\test0\file.txt\测试文件.txt",@"D:\test\test1\测试文件.txt");
+           
+           RegexExpress regexExpress=new RegexExpress();
+           regexExpress.IsMatch(@"D:\test\test0\file.txt\测试文件.txt",@"\w:(\\[\w\d\._]+)+\\");
+           // \" 对 " 转义  \\对  \ 转义
+           regexExpress.IsMatch(@"D:\test\test0\file.txt\测试文件.txt","\\w:(\\[^<>:\"/\\|?*]+)+\\");      
         }
 
 		private void Button2_Click(object sender, EventArgs e)
@@ -230,11 +233,11 @@ namespace AutoSelectPicture
 				for (int i = 0; i < length; i++) {
 					path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(i).ToString();
 					//如果是文件
-					if (IOTools.isFile(path)) {
+					if (IOTools.IsFile(path)) {
 						dragfileList.Add(path);
 					}
 					//如果是文件夹
-					if (IOTools.isDirectory(path)) {
+					if (IOTools.IsDirectory(path)) {
 						dragDirectoryList.Add(path);
 					}
 				}

@@ -123,7 +123,22 @@ namespace AutoSelectPicture.IO.层级目录下所有文件
                 return keyList;
             }
         }
-
+        /*
+         * 举例:
+         *List<string> testList = new List<string>();
+         *testList.Add(@"D:\test\");
+         *testList.Add(@"D:\test\test1\file.txt");
+         *testList.Add(@"D:\test\test1");
+         *testList.Add(@"D:\test\test1\test0\file.txt");
+         *testList.Add(@"D:\test\");
+         *testList.Add(@"D:\test\test1\test0");
+         * CascadeDirFiles cascadeDirFiles = new CascadeDirFiles();
+         * List<string> resultList=cascadeDirFiles.GetDirFiles(testList);
+         * 返回的结果:
+         * "D:\\test\\"
+         * "D:\\test\\test1\\"
+         * "D:\\test\\test1\test0\\"
+         */
         public List<string> GetDirFiles(List<string> fileList)
         {
             List<string> keyList = fileList;
@@ -144,13 +159,6 @@ namespace AutoSelectPicture.IO.层级目录下所有文件
             /*
              * 遍历列表中的字符串，并按照字符串中路径的目录数量从小到大排序
              * 举例:列表如下
-             *List<string> testList = new List<string>();
-             *testList.Add(@"D:\test\");
-             *testList.Add(@"D:\test\test1\file.txt");
-             *testList.Add(@"D:\test\test1");
-             *testList.Add(@"D:\test\test1\test0\file.txt");
-             *testList.Add(@"D:\test\");
-             *testList.Add(@"D:\test\test1\test0");
              * 
              * 片段1:
              * Path.GetDirectoryName(key).Replace('/', '\\').Split(new char[] {'\\','/'})
@@ -180,7 +188,6 @@ namespace AutoSelectPicture.IO.层级目录下所有文件
             //去重复字符串
             IEnumerable<string> distinctKeyList = keyList.Distinct();
             keyList = distinctKeyList.ToList();
-
             return keyList;
         }
 	}

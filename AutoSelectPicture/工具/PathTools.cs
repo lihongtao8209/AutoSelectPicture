@@ -199,10 +199,72 @@ namespace AutoSelectPicture.工具
 				subDirectory="";
 				SetMessage(exception.Message,exception.StackTrace);
 				string functionName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				throw new Exception(functionName,exception);
+
+                throw new Exception(functionName,exception);
 			}
 			return subDirectory;
 		}
-		
-	}
+
+        /*
+         * 
+         * 静态类Path无法区分:"c:\\test\test0\\test1\\1"是文件还是目录
+         * "c:\\test\test0\\test1\\1" 如果是磁盘文件,方法返回:"c:\\test\test0\\test1\\"
+         * "c:\\test\test0\\test1\\1" 如果是磁盘目录,方法返回:"c:\\test\test0\\test1\\1\\"
+         * 如果 "c:\\test\test0\\test1\\1"即不是磁盘文件也不是磁盘目录,返回string.Empty()
+         * 
+         */
+        public static string GetValidDirectoryName(string inputPath)
+        {
+            bool isFile = false;
+            bool isDirectory = false;
+            int lastIndex = 0;
+            string directoryName = "";
+            isFile =File.Exists(inputPath);
+            if (isFile == true)
+            {
+                lastIndex=inputPath.LastIndexOf("\\");
+                directoryName = inputPath.Substring(0, lastIndex);
+                return directoryName;
+            }
+            isDirectory = Directory.Exists(inputPath+"\\");
+            if (isDirectory == true)
+            {
+                 directoryName = inputPath + "\\";
+                 return directoryName;
+            }
+            //如果不是磁盘文件也不是磁盘目录
+            return string.Empty;
+        }
+
+        /*
+        * 
+        * 静态类Path无法区分:"c:\\test\test0\\test1\\1"是文件还是目录
+        * "c:\\test\test0\\test1\\1" 如果是文件,方法返回:"c:\\test\test0\\test1\\1"
+        * "c:\\test\test0\\test1\\1" 如果是目录,方法返回:"c:\\test\test0\\test1\\1\\"
+        * 如果 "c:\\test\test0\\test1\\1"即不是磁盘文件也不是磁盘目录,返回string.Empty()
+        * 
+        */
+        public static string GetValidPath(string inputPath)
+        {
+            bool isFile = false;
+            bool isDirectory = false;
+            string fileName = "";
+            string directoryName = "";
+            isFile = File.Exists(inputPath);
+            if (isFile == true)
+            {
+                fileName = inputPath;
+                return fileName;
+            }
+            isDirectory = Directory.Exists(inputPath + "\\");
+            if (isDirectory == true)
+            {
+                directoryName = inputPath + "\\";
+                return directoryName;
+            }
+            //如果不是磁盘文件也不是磁盘目录
+            return string.Empty;
+        }
+
+    }
 }
