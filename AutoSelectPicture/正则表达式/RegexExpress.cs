@@ -8,6 +8,7 @@
  */
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace AutoSelectPicture.正则表达式
@@ -20,9 +21,10 @@ namespace AutoSelectPicture.正则表达式
 		//忽略大小写
 		public const int IgnoreCase=(int)RegexOptions.IgnoreCase;
 		public const int None=(int)RegexOptions.None;
-		//
-		private int regexOption=0;
-		//
+		private int regexOption= None;
+        //
+        List<string> matchList = new List<string>();
+        //
 		public RegexExpress()
 		{
 			regexOption = None;
@@ -48,30 +50,33 @@ namespace AutoSelectPicture.正则表达式
 			}
 		}
 		//
-		public bool IsPatternMatch(string input, string pattern, RegexOptions options)
-		{
-			bool isMatch = Regex.IsMatch(input, pattern, options);
-			return isMatch;
-		}
-		//
-		public bool IsPatternMatch(string input, string pattern)
+		private bool IsPatternMatch(string input, string pattern)
 		{
 			bool isMatch = false;
+            string outPut = "";
 			switch (RegexOption) {
-				case IgnoreCase:
+				case None:
 					{
-						isMatch = Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase);
-                        //MatchCollection matchCollection=Regex.Matches(input, pattern, RegexOptions.IgnoreCase);
-                        //IEnumerator enumerator= matchCollection.GetEnumerator();
+                        isMatch = Regex.IsMatch(input, pattern, RegexOptions.None);
                         break;
 					}
 				default:
 					{
-						isMatch = Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase);
+                        isMatch = Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase);
                         break;
-					}
-			}
-
+                    }
+            }
+            MatchCollection matchCollection = Regex.Matches(input, pattern, RegexOptions.IgnoreCase);
+            IEnumerator enumerator = matchCollection.GetEnumerator();
+            while (enumerator.MoveNext() == true)
+            {
+                outPut = enumerator.Current.ToString();
+                matchList.Add(outPut);
+            }
+            if (matchList.Count != 0)
+            {
+                isMatch = true;
+            }
             return isMatch;
 		}
 	}
